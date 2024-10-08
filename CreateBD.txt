@@ -1,0 +1,45 @@
+
+DROP DATABASE SQL_TEST_DB;
+
+CREATE DATABASE IF NOT EXISTS SQL_TEST_DB;
+
+USE SQL_TEST_DB;
+
+CREATE TABLE IF NOT EXISTS Matter(
+  codemat varchar(100) not null,
+  wording varchar(100),
+  coef float,
+  PRIMARY KEY (codemat)
+  );
+  
+  CREATE TABLE IF NOT EXISTS Test(
+  numtest int not null,
+  testdate Date,
+  place varchar(100),
+  codemat varchar(100) not null,
+  PRIMARY KEY (numtest),
+  FOREIGN KEY (codemat) REFERENCES Matter(codemat)
+  );
+  
+  CREATE TABLE IF NOT EXISTS Student(
+  numstud int not null,
+  name varchar(100),
+  firstname varchar(100),
+  dateofbirth Date,
+  street varchar(100),
+  postalcod varchar(100),
+  city varchar(100),
+  PRIMARY KEY (numstud)
+  );
+  
+  CREATE TABLE IF NOT EXISTS Notation(
+  numstud int not null,
+  numtest int not null,
+  score float,
+  CONSTRAINT PK_notation PRIMARY KEY (numstud, numtest),
+  FOREIGN KEY (numstud) REFERENCES Student(numstud),
+  FOREIGN KEY (numtest) REFERENCES Test(numtest)
+  );
+  
+  
+  
